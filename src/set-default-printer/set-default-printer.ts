@@ -9,7 +9,8 @@ async function setDefaultPrinter(name: string): Promise<Printer | null> {
 
     const { stdout } = await execFileAsync("Powershell.exe", [
       "-Command",
-      `$printer = Get-CimInstance Win32_Printer -Filter "Name='${name}'" Invoke-CimMethod -InputObject $printer -MethodName SetDefaultPrinter`,
+      `$printer = Get-CimInstance Win32_Printer -Filter "Name='${name}'" 
+      Invoke-CimMethod -InputObject $printer -MethodName SetDefaultPrinter`,
     ]);
 
     const printer = stdout.trim();
