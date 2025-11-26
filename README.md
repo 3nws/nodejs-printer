@@ -3,7 +3,7 @@
 A utility for printing PDFs and images from Node.js and Electron.
 
 - This repository is a continuation of artiebits' pdf-to-printer library (https://github.com/artiebits/pdf-to-printer).
-- Currently available only on Windows.
+- Supports Windows and macOS (CUPS).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -37,8 +37,16 @@ yarn add nodejs-printer
 
 To print a file to the default printer:
 
+**CommonJS:**
 ```javascript
 const { print } = require("nodejs-printer");
+
+print("assets/sample.pdf").then(console.log);
+```
+
+**ES Modules:**
+```javascript
+import { print } from "nodejs-printer";
 
 print("assets/sample.pdf").then(console.log);
 ```
@@ -62,8 +70,8 @@ A function that prints your file.
    - `side` (`string`, optional): Supported names are `duplex`, `duplexshort`, `duplexlong`, and `simplex`.
    - `bin` (`string`, optional): Select tray to print to. Number or name.
    - `paperSize` (`string`, optional): Specifies the paper size. `A2`, `A3`, `A4`, `A5`, `A6`, `letter`, `legal`, `tabloid`, `statement`, or a name selectable from your printer settings.
-   - `silent` (`boolean`, optional): Silences error messages.
-   - `printDialog` (`boolean`, optional): Displays the print dialog for all the files indicated on this command line.
+   - `silent` (`boolean`, optional): Silences error messages (Windows only).
+   - `printDialog` (`boolean`, optional): Displays the print dialog (Windows only). Not supported on macOS.
    - `copies`(`number`, optional): Specifies how many copies will be printed.
 
 **Returns**
@@ -74,14 +82,23 @@ A function that prints your file.
 
 To print a file to the default printer, use the following code:
 
+**CommonJS:**
 ```javascript
 const { print } = require("nodejs-printer");
 
 print("assets/sample.pdf").then(console.log);
 ```
 
+**ES Modules:**
+```javascript
+import { print } from "nodejs-printer";
+
+print("assets/sample.pdf").then(console.log);
+```
+
 To print to a specific printer:
 
+**CommonJS:**
 ```javascript
 const { print } = require("nodejs-printer");
 
@@ -92,10 +109,35 @@ const options = {
 print("assets/pdf-sample.pdf", options).then(console.log);
 ```
 
+**ES Modules:**
+```javascript
+import { print } from "nodejs-printer";
+
+const options = {
+  printer: "Zebra",
+};
+
+print("assets/pdf-sample.pdf", options).then(console.log);
+```
+
 Here is an example with a few print settings. It will print pages 1, 3, and 5, and scale them so that they fit into the printable area of the paper.
 
+**CommonJS:**
 ```javascript
 const { print } = require("nodejs-printer");
+
+const options = {
+  printer: "Zebra",
+  pages: "1-3,5",
+  scale: "fit",
+};
+
+print("assets/pdf-sample.pdf", options).then(console.log);
+```
+
+**ES Modules:**
+```javascript
+import { print } from "nodejs-printer";
 
 const options = {
   printer: "Zebra",
@@ -116,8 +158,16 @@ A function to get a list of available printers.
 
 **Examples**
 
+**CommonJS:**
 ```javascript
 const { getPrinters } = require("nodejs-printer");
+
+getPrinters().then(console.log);
+```
+
+**ES Modules:**
+```javascript
+import { getPrinters } from "nodejs-printer";
 
 getPrinters().then(console.log);
 ```
@@ -132,11 +182,29 @@ A function to get the default printer information.
 
 **Examples**
 
+**CommonJS:**
 ```javascript
 const { getDefaultPrinter } = require("nodejs-printer");
 
 getDefaultPrinter().then(console.log);
 ```
+
+**ES Modules:**
+```javascript
+import { getDefaultPrinter } from "nodejs-printer";
+
+getDefaultPrinter().then(console.log);
+```
+
+### Platform notes
+
+- Windows: printing is performed via bundled `SumatraPDF-3.4.6-32.exe` with appropriate command-line flags.
+- macOS: printing uses the system CUPS tools. We call `lp` for printing and `lpstat`/`lpoptions` for discovering printers and paper sizes. Some options depend on the installed PPD and may vary by printer model.
+- macOS option support differences:
+  - `printDialog`: not supported; CUPS prints directly.
+  - `scale`: `fit` and `shrink` map to `-o fit-to-page`; `noscale` leaves default behavior.
+  - `side`: maps to `-o sides=...` where supported by the printer.
+  - `bin`: mapped best-effort to `-o InputSlot=<value>`; actual slot names depend on the printer PPD.
 
 ## License
 

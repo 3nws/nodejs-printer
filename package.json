@@ -1,6 +1,6 @@
 {
   "name": "nodejs-printer",
-  "version": "0.1.4",
+  "version": "0.3.3",
   "description": "A utility for printing PDFs and images from Node.js and Electron.",
   "license": "MIT",
   "repository": {
@@ -8,7 +8,15 @@
     "url": "https://github.com/hofewo/nodejs-printer.git"
   },
   "main": "dist/bundle.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/bundle.js"
+    }
+  },
   "files": [
     "dist"
   ],
