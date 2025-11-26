@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.0.0 (2025-11-26)
+
+
+### Features
+
+* add `copies` property ([#301](https://www.github.com/3nws/nodejs-printer/issues/301)) ([64bfec0](https://www.github.com/3nws/nodejs-printer/commit/64bfec081ebc82e88884f0f71bf8c946c2ef04d3))
+* add dependabot ([18a9cf6](https://www.github.com/3nws/nodejs-printer/commit/18a9cf610e6daf106ad62917df1b1e211b99ad4a))
+* Add ESM export and wrapper ([#49](https://www.github.com/3nws/nodejs-printer/issues/49)) ([812e224](https://www.github.com/3nws/nodejs-printer/commit/812e224248728ea6a40a1d5df3958cbb36c095eb))
+* add GitHub action to automate releases ([c09761e](https://www.github.com/3nws/nodejs-printer/commit/c09761e35b8962dd4c5d5aab752de87408cf5b5a))
+* allow different paper size options ([#434](https://www.github.com/3nws/nodejs-printer/issues/434)) ([a5e3b9d](https://www.github.com/3nws/nodejs-printer/commit/a5e3b9d563464b4f16b8722d0d255ec507a9b180))
+* bump SumatraPDF from 3.3.3 to 3.4.6 ([#404](https://www.github.com/3nws/nodejs-printer/issues/404)) ([b8c639c](https://www.github.com/3nws/nodejs-printer/commit/b8c639ca47952e91c48f522ec1aba738f1f3a5d2))
+* export Printer and PrintOptions types ([f96a82f](https://www.github.com/3nws/nodejs-printer/commit/f96a82fecb116f79cfdebbcee189c783ca0ee06a))
+* list paper sizes supported by a specific printer ([#447](https://www.github.com/3nws/nodejs-printer/issues/447)) ([7f3d331](https://www.github.com/3nws/nodejs-printer/commit/7f3d331413dbc5c98c8b5b245539ba38da038d41))
+* throw unsupported OS error on a method call ([#296](https://www.github.com/3nws/nodejs-printer/issues/296)) ([c93fbbd](https://www.github.com/3nws/nodejs-printer/commit/c93fbbd664fc62b34aff28025383c2af13316980))
+* update CirrusCI config ([#437](https://www.github.com/3nws/nodejs-printer/issues/437)) ([d9a3a72](https://www.github.com/3nws/nodejs-printer/commit/d9a3a72d45022c0d50a660756272a4dffdac58bb))
+
+
+### Bug Fixes
+
+* **build:** proper refer to built ts declarations ([54ee7e8](https://www.github.com/3nws/nodejs-printer/commit/54ee7e878b08f1aba53c25a472e5d7555bfce4f5))
+* overwrite win32 options  ([#221](https://www.github.com/3nws/nodejs-printer/issues/221)) ([4d64b55](https://www.github.com/3nws/nodejs-printer/commit/4d64b55749396b8a4596f7fb45a1b26abcacb766))
+* use SumatraPDF 32 bit build ([#435](https://www.github.com/3nws/nodejs-printer/issues/435)) ([71b9d07](https://www.github.com/3nws/nodejs-printer/commit/71b9d074f1d35d298d8e7a5afe2885b8bb21867a))
+
 ## [5.6.0](https://www.github.com/artiebits/pdf-to-printer/compare/v5.5.0...v5.6.0) (2023-03-07)
 
 ### Features
